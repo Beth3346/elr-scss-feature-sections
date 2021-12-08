@@ -1,17 +1,24 @@
-# elr-scss-steps
+# Feature Sections
 
+[![npm version](http://img.shields.io/npm/v/elr-scss-feature-sections.svg)](https://www.npmjs.org/package/elr-scss-feature-sections)
+[![Build Status](https://github.com/elr-scss-feature-sections/workflows/CI/badge.svg)](https://github.com/elr-scss-feature-sections/actions?workflow=CI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm](https://img.shields.io/npm/dm/elr-scss-steps.svg?style=flat)](https://npmjs.com/package/elr-scss-steps)
+[![npm](https://img.shields.io/npm/dm/elr-scss-feature-sections.svg?style=flat)](https://npmjs.com/package/elr-scss-feature-sections)
 
-a scss mixin for steps
+a scss mixin for feature-sections
 
 ## Installation
 
 Download node at [nodejs.org](http://nodejs.org) and install it, if you haven't already.
 
 ```sh
-npm install elr-scss-steps --save
-yarn add elr-scss-steps
+npm install elr-scss-feature-sections
+```
+
+or
+
+```sh
+yarn add elr-scss-feature-sections
 ```
 
 ## License
