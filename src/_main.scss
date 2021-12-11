@@ -1,12 +1,147 @@
+@use "sass:math";
 @import "elr-scss-functions/src/main";
+@import "elr-scss-config/src/main";
 
-@mixin elr-steps($config: ()) {
+@mixin elr-feature-section($config: ()) {
   $config: extend(
     (
-      color: #333,
+      background-color: $primary-color,
+      text-color: $white,
+      num-items: 4,
     ),
     $config
   );
 
-  $color: map-get($config, color);
+  $background-color: map-get($config, background-color);
+  $text-color: map-get($config, text-color);
+  $num-items: map-get($config, num-items);
+  $item-width: math.div(1, $num-items);
+
+  background-color: $primary-color;
+  padding: ($base-fontsize * 2);
+
+  .feature-section-headings {
+    margin: 0 auto $base-fontsize;
+    max-width: 600px;
+
+    p {
+      color: $white;
+      text-align: center;
+      font-size: $base-fontsize;
+    }
+  }
+
+  .feature-section-heading {
+    padding: 0;
+    margin: 0 0 $base-fontsize;
+    font-size: $base-fontsize * 2;
+    color: $white;
+    text-align: center;
+    font-weight: 900;
+    text-shadow: $text-shadow;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      flex-basis: (100% * $item-width);
+      margin: 0;
+      padding: $base-fontsize ($base-fontsize * 2);
+
+      @media (max-width: 1024px) {
+        padding: $base-fontsize ($base-fontsize * 1.25);
+      }
+
+      @media (max-width: 768px) {
+        flex-basis: (100% * 0.33);
+        padding: ($base-fontsize * 0.5) ($base-fontsize * 1.25);
+      }
+
+      @media (max-width: 700px) {
+        flex-basis: 50%;
+        padding: ($base-fontsize * 0.5) ($base-fontsize * 1.25);
+      }
+
+      @media (max-width: 568px) {
+        flex-basis: 100%;
+        padding: ($base-fontsize * 0.5) $base-fontsize;
+      }
+    }
+  }
+
+  .grid-item {
+    text-align: center;
+
+    .grid-item-heading,
+    p {
+      color: $white;
+    }
+
+    p {
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .grid-item-heading {
+    font-weight: 900;
+    font-size: $base-fontsize * 1.5;
+    padding: 0;
+    margin: 0;
+    margin-bottom: $base-fontsize * 0.5;
+    text-shadow: $text-shadow;
+
+    @media (max-width: 1024px) {
+      font-size: $base-fontsize * 1.25;
+    }
+  }
+
+  .button-ghost {
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+    background: transparent;
+    border: 1px solid $white;
+    color: $white;
+    text-decoration: none;
+    padding: 10px $base-fontsize 8px;
+    margin: ($base-fontsize * 1.5) auto $base-fontsize;
+    width: auto;
+    border-radius: $border-radius;
+    text-align: center;
+    // line-height: 1;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: $white;
+      color: $primary-color;
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
+    }
+  }
+
+  .grid-item-icon {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($white, 0.5);
+    color: $primary-color;
+    font-size: $base-fontsize * 2;
+    margin: $base-fontsize auto ($base-fontsize * 1.5);
+    text-align: center;
+    box-shadow: $shadow;
+  }
 }
