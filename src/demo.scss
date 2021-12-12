@@ -40,6 +40,18 @@
   padding: ($base-fontsize * 1.5) 0;
 }
 
-.feature-section-grid {
+.feature-section {
   @include elr-feature-section;
+}
+
+.feature-section-grid {
+  @include elr-feature-grid;
+
+  .grid-item {
+    @include elr-icon-block();
+  }
+}
+
+.feature-section-list {
+  @include elr-feature-list;
 }

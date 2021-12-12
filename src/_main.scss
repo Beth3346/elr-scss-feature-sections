@@ -17,7 +17,7 @@
   $num-items: map-get($config, num-items);
   $item-width: math.div(1, $num-items);
 
-  background-color: $primary-color;
+  background-color: $background-color;
   padding: ($base-fontsize * 2);
 
   .feature-section-headings {
@@ -40,6 +40,22 @@
     font-weight: 900;
     text-shadow: $text-shadow;
   }
+}
+
+@mixin elr-feature-grid($config: ()) {
+  $config: extend(
+    (
+      background-color: $primary-color,
+      text-color: $white,
+      num-items: 4,
+    ),
+    $config
+  );
+
+  $background-color: map-get($config, background-color);
+  $text-color: map-get($config, text-color);
+  $num-items: map-get($config, num-items);
+  $item-width: math.div(1, $num-items);
 
   ul {
     display: flex;
@@ -73,46 +89,88 @@
       }
     }
   }
+}
+
+@mixin elr-feature-list($config: ()) {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: ($base-fontsize * 1.5) ($base-fontsize * 2) 0;
+    margin: 0;
+
+    li {
+      flex-basis: 50%;
+      margin: 0;
+      padding: $base-fontsize 0;
+
+      @media (max-width: 568px) {
+        flex-basis: 100%;
+      }
+
+      &:nth-child(odd) {
+        .grid-item {
+          margin: 0 ($base-fontsize * 1.5) 0 0;
+        }
+      }
+
+      &:nth-child(even) {
+        .grid-item {
+          margin: 0 0 0 ($base-fontsize * 1.5);
+        }
+      }
+    }
+  }
 
   .grid-item {
-    text-align: center;
+    @include elr-feature-list-item;
+  }
+}
 
-    .grid-item-heading,
-    p {
-      color: $white;
-    }
+@mixin elr-feature-list-item($config: ()) {
+  color: $white;
+  // background-color: rgba($white, 0.5);
 
-    p {
-      line-height: 1.5;
-      font-size: 14px;
-      padding: 0;
-      margin: 0;
-    }
+  .grid-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: $base-fontsize;
   }
 
   .grid-item-heading {
     font-weight: 900;
-    font-size: $base-fontsize * 1.5;
-    padding: 0;
-    margin: 0;
-    margin-bottom: $base-fontsize * 0.5;
     text-shadow: $text-shadow;
+    margin-top: 0;
+    margin-left: $base-fontsize;
+    padding: 0;
+  }
 
-    @media (max-width: 1024px) {
-      font-size: $base-fontsize * 1.25;
-    }
+  .grid-item-icon {
+    @include grid-item-icon(
+      $config: (
+        centered: false,
+        border-radius: 5px,
+        size: 50px,
+        font-size: 24px,
+      )
+    );
+  }
+
+  .grid-item-heading,
+  p {
+    color: $white;
   }
 
   .button-ghost {
-    font-size: 14px;
+    font-size: $base-fontsize * 0.875;
     font-weight: 700;
     display: inline-block;
     background: transparent;
     border: 1px solid $white;
     color: $white;
     text-decoration: none;
-    padding: 10px $base-fontsize 8px;
-    margin: ($base-fontsize * 1.5) auto $base-fontsize;
+    padding: ($base-fontsize * 0.5) $base-fontsize;
+    margin: ($base-fontsize * 0.5) 0 $base-fontsize;
     width: auto;
     border-radius: $border-radius;
     text-align: center;
@@ -129,19 +187,123 @@
       box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
     }
   }
+}
+
+@mixin elr-icon-block($config: ()) {
+  $config: extend(
+    (
+      background-color: $primary-color,
+      text-color: $white,
+    ),
+    $config
+  );
+
+  $background-color: map-get($config, background-color);
+  $text-color: map-get($config, text-color);
+
+  text-align: center;
+
+  .grid-item-heading,
+  p {
+    color: $white;
+  }
+
+  p {
+    line-height: 1.5;
+    font-size: $base-fontsize * 0.875;
+    padding: 0;
+    margin: 0;
+  }
+
+  .grid-item-heading {
+    font-weight: 900;
+    font-size: $base-fontsize * 1.5;
+    padding: 0;
+    margin: 0;
+    margin-bottom: $base-fontsize * 0.5;
+    text-shadow: $text-shadow;
+
+    @media (max-width: 1024px) {
+      font-size: $base-fontsize * 1.25;
+    }
+  }
+
+  .button-ghost {
+    font-size: $base-fontsize * 0.875;
+    font-weight: 700;
+    display: inline-block;
+    background: transparent;
+    border: 1px solid $white;
+    color: $white;
+    text-decoration: none;
+    padding: ($base-fontsize * 0.5) $base-fontsize;
+    margin: ($base-fontsize * 1.5) auto $base-fontsize;
+    width: auto;
+    border-radius: $border-radius;
+    text-align: center;
+    // line-height: 1;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: $white;
+      color: $background-color;
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
+    }
+  }
 
   .grid-item-icon {
-    height: 60px;
-    width: 60px;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba($white, 0.5);
-    color: $primary-color;
-    font-size: $base-fontsize * 2;
-    margin: $base-fontsize auto ($base-fontsize * 1.5);
-    text-align: center;
-    box-shadow: $shadow;
+    @include grid-item-icon(
+      $config: (
+        background-color: $background-color,
+      )
+    );
   }
+}
+
+@mixin grid-item-icon($config: ()) {
+  $config: extend(
+    (
+      background-color: $primary-color,
+      border-radius: "round",
+      size: 60px,
+      centered: true,
+      font-size: $base-fontsize * 2,
+    ),
+    $config
+  );
+
+  $background-color: map-get($config, background-color);
+  $border-radius: map-get($config, border-radius);
+  $size: map-get($config, size);
+  $font-size: map-get($config, font-size);
+  $centered: map-get($config, centered);
+
+  height: $size;
+  width: $size;
+
+  @if ($border-radius == "round") {
+    border-radius: $size * 0.5;
+  } @else {
+    border-radius: $border-radius;
+  }
+
+  @if ($centered) {
+    margin: $base-fontsize auto ($base-fontsize * 1.5);
+  } @else {
+    margin: 0;
+  }
+
+  color: $background-color;
+  background-color: rgba($white, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-size;
+  text-align: center;
+  box-shadow: $shadow;
 }
