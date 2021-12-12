@@ -137,14 +137,6 @@
     margin-bottom: $base-fontsize;
   }
 
-  .grid-item-heading {
-    font-weight: 900;
-    text-shadow: $text-shadow;
-    margin-top: 0;
-    margin-left: $base-fontsize;
-    padding: 0;
-  }
-
   .grid-item-icon {
     @include grid-item-icon(
       $config: (
@@ -154,38 +146,30 @@
         font-size: 24px,
       )
     );
+    margin-right: $base-fontsize;
   }
 
   .grid-item-heading,
+  .grid-item-subheading,
   p {
     color: $white;
+    margin: 0;
+    padding: 0;
+  }
+
+  .grid-item-heading {
+    font-weight: 900;
+    text-shadow: $text-shadow;
+    font-size: 24px;
+  }
+
+  .grid-item-subheading {
+    font-size: 14px;
   }
 
   .button-ghost {
-    font-size: $base-fontsize * 0.875;
-    font-weight: 700;
-    display: inline-block;
-    background: transparent;
-    border: 1px solid $white;
-    color: $white;
-    text-decoration: none;
-    padding: ($base-fontsize * 0.5) $base-fontsize;
-    margin: ($base-fontsize * 0.5) 0 $base-fontsize;
-    width: auto;
-    border-radius: $border-radius;
-    text-align: center;
-    // line-height: 1;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-
-    &:hover {
-      background-color: $white;
-      color: $primary-color;
-    }
-
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
-    }
+    @include elr-feature-button;
+    margin: $base-fontsize 0;
   }
 }
 
@@ -229,30 +213,8 @@
   }
 
   .button-ghost {
-    font-size: $base-fontsize * 0.875;
-    font-weight: 700;
-    display: inline-block;
-    background: transparent;
-    border: 1px solid $white;
-    color: $white;
-    text-decoration: none;
-    padding: ($base-fontsize * 0.5) $base-fontsize;
-    margin: ($base-fontsize * 1.5) auto $base-fontsize;
-    width: auto;
-    border-radius: $border-radius;
-    text-align: center;
-    // line-height: 1;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-
-    &:hover {
-      background-color: $white;
-      color: $background-color;
-    }
-
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
-    }
+    @include elr-feature-button;
+    margin: ($base-fontsize * 1.5) 0 $base-fontsize;
   }
 
   .grid-item-icon {
@@ -306,4 +268,39 @@
   font-size: $font-size;
   text-align: center;
   box-shadow: $shadow;
+}
+
+@mixin elr-feature-button($config: ()) {
+  $config: extend(
+    (
+      background-color: $primary-color,
+    ),
+    $config
+  );
+
+  $background-color: map-get($config, background-color);
+
+  font-size: $base-fontsize * 0.875;
+  font-weight: 700;
+  display: inline-block;
+  background: transparent;
+  border: 1px solid $white;
+  color: $white;
+  text-decoration: none;
+  padding: ($base-fontsize * 0.5) $base-fontsize;
+  width: auto;
+  border-radius: $border-radius;
+  text-align: center;
+  // line-height: 1;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: $white;
+    color: $background-color;
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px $primary-color, 0 0 0 3px $white;
+  }
 }
