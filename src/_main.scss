@@ -7,7 +7,7 @@
     (
       background-color: $primary-color,
       text-color: $white,
-      text-align: "center",
+      text-align: center,
       num-items: 4,
     ),
     $config
@@ -23,7 +23,7 @@
   padding: ($base-fontsize * 2);
 
   .feature-section-headings {
-    @if ($text-align == "center") {
+    @if ($text-align == center) {
       margin-left: auto;
       margin-right: auto;
       max-width: 600px;
