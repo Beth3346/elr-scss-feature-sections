@@ -7,6 +7,7 @@
     (
       background-color: $primary-color,
       text-color: $white,
+      text-align: "center",
       num-items: 4,
     ),
     $config
@@ -14,6 +15,7 @@
 
   $background-color: map-get($config, background-color);
   $text-color: map-get($config, text-color);
+  $text-align: map-get($config, text-align);
   $num-items: map-get($config, num-items);
   $item-width: math.div(1, $num-items);
 
@@ -21,12 +23,21 @@
   padding: ($base-fontsize * 2);
 
   .feature-section-headings {
-    margin: 0 auto $base-fontsize;
-    max-width: 600px;
+    @if ($text-align == "center") {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 600px;
+    } @else {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    margin-top: 0;
+    margin-bottom: $base-fontsize;
 
     p {
       color: $white;
-      text-align: center;
+      text-align: $text-align;
       font-size: $base-fontsize;
     }
   }
@@ -36,7 +47,7 @@
     margin: 0 0 $base-fontsize;
     font-size: $base-fontsize * 2;
     color: $white;
-    text-align: center;
+    text-align: $text-align;
     font-weight: 900;
     text-shadow: $text-shadow;
   }
@@ -69,21 +80,20 @@
       margin: 0;
       padding: $base-fontsize ($base-fontsize * 2);
 
-      @media (max-width: 1024px) {
+      @media (max-width: $landscape-width) {
         padding: $base-fontsize ($base-fontsize * 1.25);
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: $tablet-width) {
         flex-basis: (100% * 0.33);
         padding: ($base-fontsize * 0.5) ($base-fontsize * 1.25);
       }
 
       @media (max-width: 700px) {
         flex-basis: 50%;
-        padding: ($base-fontsize * 0.5) ($base-fontsize * 1.25);
       }
 
-      @media (max-width: 568px) {
+      @media (max-width: $mobile-width) {
         flex-basis: 100%;
         padding: ($base-fontsize * 0.5) $base-fontsize;
       }
@@ -104,7 +114,7 @@
       margin: 0;
       padding: $base-fontsize 0;
 
-      @media (max-width: 568px) {
+      @media (max-width: $mobile-width) {
         flex-basis: 100%;
       }
 
@@ -141,9 +151,9 @@
     @include grid-item-icon(
       $config: (
         centered: false,
-        border-radius: 5px,
+        border-radius: $border-radius,
         size: 50px,
-        font-size: 24px,
+        font-size: $base-fontsize * 1.5,
       )
     );
     margin-right: $base-fontsize;
@@ -160,11 +170,11 @@
   .grid-item-heading {
     font-weight: 900;
     text-shadow: $text-shadow;
-    font-size: 24px;
+    font-size: $base-fontsize * 1.5;
   }
 
   .grid-item-subheading {
-    font-size: 14px;
+    font-size: $base-fontsize * 0.875;
   }
 
   .button-ghost {
@@ -207,7 +217,7 @@
     margin-bottom: $base-fontsize * 0.5;
     text-shadow: $text-shadow;
 
-    @media (max-width: 1024px) {
+    @media (max-width: $landscape-width) {
       font-size: $base-fontsize * 1.25;
     }
   }
