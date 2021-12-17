@@ -138,6 +138,17 @@
 }
 
 @mixin elr-feature-list-item($config: ()) {
+  $config: extend(
+    (
+      text-color: $white,
+      text-align: left,
+    ),
+    $config
+  );
+
+  $text-color: map-get($config, text-color);
+  $text-align: map-get($config, text-align);
+
   color: $white;
   // background-color: rgba($white, 0.5);
 
@@ -162,7 +173,8 @@
   .grid-item-heading,
   .grid-item-subheading,
   p {
-    color: $white;
+    text-align: $text-align;
+    color: $text-color;
     margin: 0;
     padding: 0;
   }
